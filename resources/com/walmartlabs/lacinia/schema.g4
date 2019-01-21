@@ -84,7 +84,7 @@ implementationDef
   ;
 
 inputTypeDef
-  : description? 'input' Name directiveList? fieldDefs
+  : description? K_INPUT Name directiveList? fieldDefs
   ;
 
 interfaceDef
@@ -124,7 +124,7 @@ argList
   ;
 
 argument
-  : description? Name ':' typeSpec defaultValue? directiveList?
+  : description? anyName ':' typeSpec defaultValue? directiveList?
   ;
 
 typeSpec
@@ -150,10 +150,27 @@ defaultValue
   : '=' value
   ;
 
+anyName
+  : nameTokens
+  | K_TRUE
+  | K_FALSE
+  | K_NULL
+  ;
+
+nameTokens
+  : Name
+  | K_INPUT
+  ;
+
 BooleanValue
-    : 'true'
-    | 'false'
+    : K_TRUE
+    | K_FALSE
     ;
+
+K_INPUT : 'input';
+K_TRUE  : 'true' ;
+K_FALSE : 'false';
+K_NULL  : 'null' ;
 
 Name
   : [_A-Za-z][_0-9A-Za-z]*
@@ -188,11 +205,7 @@ objectField
     ;
 
 NullValue
-    : Null
-    ;
-
-Null
-    : 'null'
+    : K_NULL
     ;
 
 IntValue

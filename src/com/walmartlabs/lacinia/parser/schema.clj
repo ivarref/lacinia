@@ -176,6 +176,14 @@
   [prod]
   (-> prod second keyword))
 
+(defmethod xform :anyName
+  [prod]
+  (xform-second prod))
+
+(defmethod xform :nameTokens
+  [prod]
+  (xform (list :name (-> prod second second))))
+
 (defmethod xform :description
   [prod]
   (xform-second prod))
@@ -268,10 +276,10 @@
 
 (defmethod xform :argument
   [prod]
-  (let [{:keys [name typeSpec defaultValue description directiveList]} (tag prod)]
-    [(xform name)
+  (let [{:keys [anyName typeSpec defaultValue description directiveList]} (tag prod)]
+    [(xform anyName)
      (-> {:type (xform typeSpec)}
-         (common/copy-meta name)
+         (common/copy-meta anyName)
          (apply-description description)
          (apply-directives directiveList)
          (cond-> defaultValue (assoc :default-value (xform-second defaultValue))))]))

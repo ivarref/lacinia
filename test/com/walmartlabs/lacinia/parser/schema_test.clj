@@ -118,6 +118,14 @@
               :type 'String}}}}}
          (parse-string "type Ebb { flow (enabled: Boolean) : String }"))))
 
+(deftest schema-field-args-2
+  (is (= {:objects
+          {:Ebb
+           {:fields
+            {:flow
+             {:args {:input {:type 'Boolean}}
+              :type 'String}}}}}
+         (parse-string "type Ebb { flow (input: Boolean) : String }"))))
 
 (deftest schema-directives
   (is (= '{:directive-defs
