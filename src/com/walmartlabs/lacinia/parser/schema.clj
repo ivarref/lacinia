@@ -369,10 +369,10 @@
 
 (defmethod xform :inputTypeDef
   [prod]
-  (let [{:keys [name fieldDefs description directiveList]} (tag prod)]
-    [[:input-objects (xform name)]
+  (let [{:keys [anyName fieldDefs description directiveList]} (tag prod)]
+    [[:input-objects (xform anyName)]
      (-> {:fields (xform fieldDefs)}
-         (common/copy-meta name)
+         (common/copy-meta anyName)
          (apply-description description)
          (apply-directives directiveList))]))
 

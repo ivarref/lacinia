@@ -10,7 +10,7 @@ description
   ;
 
 schemaDef
-  : 'schema' directiveList? '{' operationTypeDef+ '}'
+  : K_SCHEMA directiveList? '{' operationTypeDef+ '}'
   ;
 
 operationTypeDef
@@ -20,15 +20,15 @@ operationTypeDef
   ;
 
 queryOperationDef
-  : 'query' ':' Name
+  : K_QUERY ':' Name
   ;
 
 mutationOperationDef
-  : 'mutation' ':' Name
+  : K_MUTATION ':' Name
   ;
 
 subscriptionOperationDef
-  : 'subscription' ':' Name
+  : K_SUBSCRIPTION ':' Name
   ;
 
 directiveLocationList
@@ -51,7 +51,7 @@ typeSystemDirectiveLocation
   ;
 
 directiveDef
-  : description? 'directive' '@' Name argList? 'on' directiveLocationList
+  : description? K_DIRECTIVE '@' Name argList? K_ON directiveLocationList
   ;
 
 
@@ -80,23 +80,23 @@ fieldDefs
   ;
 
 implementationDef
-  : 'implements' Name+
+  : K_IMPLEMENTS Name+
   ;
 
 inputTypeDef
-  : description? K_INPUT Name directiveList? fieldDefs
+  : description? K_INPUT anyName directiveList? fieldDefs
   ;
 
 interfaceDef
-  : description? 'interface' Name directiveList? fieldDefs
+  : description? K_INTERFACE Name directiveList? fieldDefs
   ;
 
 scalarDef
-  : description? 'scalar' Name directiveList?
+  : description? K_SCALAR Name directiveList?
   ;
 
 unionDef
-  : description? 'union' Name directiveList? '=' unionTypes
+  : description? K_UNION Name directiveList? '=' unionTypes
   ;
 
 unionTypes
@@ -104,7 +104,7 @@ unionTypes
   ;
 
 enumDef
-  : description? 'enum' Name directiveList? enumValueDefs
+  : description? K_ENUM Name directiveList? enumValueDefs
   ;
 
 enumValueDefs
@@ -159,20 +159,48 @@ anyName
 
 nameTokens
   : Name
-  | K_INPUT
   | K_TYPE
+  | K_IMPLEMENTS
+  | K_INTERFACE
+  | K_SCHEMA
+  | K_ENUM
+  | K_UNION
+  | K_INPUT
+  | K_DIRECTIVE
+  | K_EXTEND
+  | K_SCALAR
+  | K_ON
+  | K_FRAGMENT
+  | K_QUERY
+  | K_MUTATION
+  | K_SUBSCRIPTION
+  | K_VALUE
   ;
+
+K_TYPE         : 'type'         ;
+K_IMPLEMENTS   : 'implements'   ;
+K_INTERFACE    : 'interface'    ;
+K_SCHEMA       : 'schema'       ;
+K_ENUM         : 'enum'         ;
+K_UNION        : 'union'        ;
+K_INPUT        : 'input'        ;
+K_DIRECTIVE    : 'directive'    ;
+K_EXTEND       : 'extend'       ;
+K_SCALAR       : 'scalar'       ;
+K_ON           : 'on'           ;
+K_FRAGMENT     : 'fragment'     ;
+K_QUERY        : 'query'        ;
+K_MUTATION     : 'mutation'     ;
+K_SUBSCRIPTION : 'subscription' ;
+K_VALUE        : 'value'        ;
+K_TRUE         : 'true'         ;
+K_FALSE        : 'false'        ;
+K_NULL         : 'null'         ;
 
 BooleanValue
     : K_TRUE
     | K_FALSE
     ;
-
-K_INPUT : 'input';
-K_TYPE  : 'type' ;
-K_TRUE  : 'true' ;
-K_FALSE : 'false';
-K_NULL  : 'null' ;
 
 Name
   : [_A-Za-z][_0-9A-Za-z]*
