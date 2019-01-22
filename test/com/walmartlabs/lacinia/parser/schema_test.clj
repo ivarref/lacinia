@@ -87,6 +87,14 @@
              {:type 'String}}}}}
          (parse-string "type Ebb { flow: String }"))))
 
+(deftest schema-type-2
+  (is (= {:objects
+          {:Ebb
+           {:fields
+            {:type
+             {:type 'String}}}}}
+         (parse-string "type Ebb { type: String }"))))
+
 (deftest schema-enums
   (is (= {:enums
           {:Target

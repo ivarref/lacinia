@@ -190,10 +190,10 @@
 
 (defmethod xform :typeDef
   [prod]
-  (let [{:keys [name implementationDef fieldDefs description directiveList]} (tag prod)]
-    [[:objects (xform name)]
+  (let [{:keys [anyName implementationDef fieldDefs description directiveList]} (tag prod)]
+    [[:objects (xform anyName)]
      (-> {:fields (xform fieldDefs)}
-         (common/copy-meta name)
+         (common/copy-meta anyName)
          (apply-description description)
          (apply-directives directiveList)
          (cond-> implementationDef (assoc :implements (xform implementationDef))))]))
@@ -261,10 +261,10 @@
 
 (defmethod xform :fieldDef
   [prod]
-  (let [{:keys [name typeSpec argList description directiveList]} (tag prod)]
-    [(xform name)
+  (let [{:keys [anyName typeSpec argList description directiveList]} (tag prod)]
+    [(xform anyName)
      (-> {:type (xform typeSpec)}
-         (common/copy-meta name)
+         (common/copy-meta anyName)
          (apply-description description)
          (apply-directives directiveList)
          (cond->

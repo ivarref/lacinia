@@ -72,7 +72,7 @@ directiveArg
   ;
 
 typeDef
-  : description? 'type' Name implementationDef? directiveList? fieldDefs
+  : description? K_TYPE anyName implementationDef? directiveList? fieldDefs
   ;
 
 fieldDefs
@@ -116,7 +116,7 @@ enumValueDef
   ;
 
 fieldDef
-  : description? Name argList? ':' typeSpec directiveList?
+  : description? anyName argList? ':' typeSpec directiveList?
   ;
 
 argList
@@ -160,6 +160,7 @@ anyName
 nameTokens
   : Name
   | K_INPUT
+  | K_TYPE
   ;
 
 BooleanValue
@@ -168,6 +169,7 @@ BooleanValue
     ;
 
 K_INPUT : 'input';
+K_TYPE  : 'type' ;
 K_TRUE  : 'true' ;
 K_FALSE : 'false';
 K_NULL  : 'null' ;
