@@ -200,10 +200,10 @@
 
 (defmethod xform :directiveDef
   [prod]
-  (let [{:keys [name argList directiveLocationList description]} (tag prod)]
-    [[:directive-defs (xform name)]
+  (let [{:keys [anyName argList directiveLocationList description]} (tag prod)]
+    [[:directive-defs (xform anyName)]
      (-> {:locations (xform directiveLocationList)}
-         (common/copy-meta name)
+         (common/copy-meta anyName)
          (apply-description description)
          (cond->
            argList (assoc :args (xform argList))))]))
@@ -237,9 +237,9 @@
 
 (defmethod xform :directive
   [prod]
-  (let [{:keys [name directiveArgList]} (tag prod)]
-    (-> {:directive-type (xform name)}
-        (common/copy-meta name)
+  (let [{:keys [anyName directiveArgList]} (tag prod)]
+    (-> {:directive-type (xform anyName)}
+        (common/copy-meta anyName)
         (cond->
           directiveArgList (assoc :directive-args (xform directiveArgList))))))
 
@@ -323,19 +323,19 @@
 
 (defmethod xform :interfaceDef
   [prod]
-  (let [{:keys [name fieldDefs description directiveList]} (tag prod)]
-    [[:interfaces (xform name)]
+  (let [{:keys [anyName fieldDefs description directiveList]} (tag prod)]
+    [[:interfaces (xform anyName)]
      (-> {:fields (xform fieldDefs)}
-         (common/copy-meta name)
+         (common/copy-meta anyName)
          (apply-description description)
          (apply-directives directiveList))]))
 
 (defmethod xform :unionDef
   [prod]
-  (let [{:keys [description name unionTypes directiveList]} (tag prod)]
-    [[:unions (xform name)]
+  (let [{:keys [description anyName unionTypes directiveList]} (tag prod)]
+    [[:unions (xform anyName)]
      (-> {:members (xform unionTypes)}
-         (common/copy-meta name)
+         (common/copy-meta anyName)
          (apply-description description)
          (apply-directives directiveList))]))
 
@@ -378,10 +378,10 @@
 
 (defmethod xform :scalarDef
   [prod]
-  (let [{:keys [name description directiveList]} (tag prod)]
-    [[:scalars (xform name)]
+  (let [{:keys [anyName description directiveList]} (tag prod)]
+    [[:scalars (xform anyName)]
      (-> {}
-         (common/copy-meta name)
+         (common/copy-meta anyName)
          (apply-description description)
          (apply-directives directiveList))]))
 

@@ -20,15 +20,15 @@ operationTypeDef
   ;
 
 queryOperationDef
-  : K_QUERY ':' Name
+  : K_QUERY ':' anyName
   ;
 
 mutationOperationDef
-  : K_MUTATION ':' Name
+  : K_MUTATION ':' anyName
   ;
 
 subscriptionOperationDef
-  : K_SUBSCRIPTION ':' Name
+  : K_SUBSCRIPTION ':' anyName
   ;
 
 directiveLocationList
@@ -49,7 +49,7 @@ typeSystemDirectiveLocation
   ;
 
 directiveDef
-  : description? K_DIRECTIVE '@' Name argList? K_ON directiveLocationList
+  : description? K_DIRECTIVE '@' anyName argList? K_ON directiveLocationList
   ;
 
 
@@ -58,7 +58,7 @@ directiveList
   ;
 
 directive
-  : '@' Name directiveArgList?
+  : '@' anyName directiveArgList?
   ;
 
 directiveArgList
@@ -66,7 +66,7 @@ directiveArgList
   ;
 
 directiveArg
-  : Name ':' value
+  : anyName ':' value
   ;
 
 typeDef
@@ -78,7 +78,7 @@ fieldDefs
   ;
 
 implementationDef
-  : K_IMPLEMENTS Name+
+  : K_IMPLEMENTS anyName+
   ;
 
 inputTypeDef
@@ -86,15 +86,15 @@ inputTypeDef
   ;
 
 interfaceDef
-  : description? K_INTERFACE Name directiveList? fieldDefs
+  : description? K_INTERFACE anyName directiveList? fieldDefs
   ;
 
 scalarDef
-  : description? K_SCALAR Name directiveList?
+  : description? K_SCALAR anyName directiveList?
   ;
 
 unionDef
-  : description? K_UNION Name directiveList? '=' unionTypes
+  : description? K_UNION anyName directiveList? '=' unionTypes
   ;
 
 unionTypes
