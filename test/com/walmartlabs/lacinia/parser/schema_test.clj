@@ -114,8 +114,8 @@
 (deftest schema-union
   (is (= {:unions
           {:Matter
-           {:members [:Solid :Liquid :Gas :Plasma]}}}
-         (parse-string "union Matter = Solid | Liquid | Gas | Plasma"))))
+           {:members [:Solid :Liquid :Gas :Plasma :INPUT_OBJECT]}}}
+         (parse-string "union Matter = Solid | Liquid | Gas | Plasma | INPUT_OBJECT"))))
 
 (deftest schema-field-args
   (is (= {:objects

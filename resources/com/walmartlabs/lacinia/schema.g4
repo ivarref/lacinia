@@ -98,7 +98,7 @@ unionDef
   ;
 
 unionTypes
-  : (Name '|')* Name
+  : (anyName '|')* anyName
   ;
 
 enumDef
