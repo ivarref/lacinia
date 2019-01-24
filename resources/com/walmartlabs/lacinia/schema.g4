@@ -102,7 +102,7 @@ unionTypes
   ;
 
 enumDef
-  : description? K_ENUM Name directiveList? enumValueDefs
+  : description? K_ENUM anyName directiveList? enumValueDefs
   ;
 
 enumValueDefs
@@ -110,7 +110,7 @@ enumValueDefs
   ;
 
 enumValueDef
-  : description? Name directiveList?
+  : description? nameTokens directiveList?
   ;
 
 fieldDef

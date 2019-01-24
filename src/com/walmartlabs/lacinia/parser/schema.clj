@@ -348,10 +348,10 @@
 
 (defmethod xform :enumDef
   [prod]
-  (let [{:keys [description name enumValueDefs directiveList]} (tag prod)]
-    [[:enums (xform name)]
+  (let [{:keys [description anyName enumValueDefs directiveList]} (tag prod)]
+    [[:enums (xform anyName)]
      (-> {:values (xform enumValueDefs)}
-         (common/copy-meta name)
+         (common/copy-meta anyName)
          (apply-description description)
          (apply-directives directiveList))]))
 
@@ -361,9 +361,9 @@
 
 (defmethod xform :enumValueDef
   [prod]
-  (let [{:keys [description name directiveList]} (tag prod)]
-    (-> {:enum-value (xform name)}
-        (common/copy-meta name)
+  (let [{:keys [description nameTokens directiveList]} (tag prod)]
+    (-> {:enum-value (xform nameTokens)}
+        (common/copy-meta nameTokens)
         (apply-description description)
         (apply-directives directiveList))))
 
