@@ -343,7 +343,7 @@
   [prod]
   (->> prod
        rest
-       (filter #(-> % first (= :name)))
+       (filter #(-> % first (= :anyName)))
        (mapv xform)))
 
 (defmethod xform :enumDef
