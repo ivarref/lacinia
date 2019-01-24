@@ -134,7 +134,7 @@ typeSpec
    references to default scalar types use a Symbol, not a Keyword. */
 
 typeName
-  : Name;
+  : anyName;
 
 listType
   : '[' typeSpec ']'
@@ -230,7 +230,7 @@ value
     ;
 
 enumValue
-    : Name
+    : nameTokens
     ;
 
 arrayValue
@@ -242,7 +242,7 @@ objectValue
     ;
 
 objectField
-    : Name ':' value
+    : anyName ':' value
     ;
 
 NullValue
